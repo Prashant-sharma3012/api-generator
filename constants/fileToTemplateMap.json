@@ -1,62 +1,64 @@
-[
-  {
-    "filePath": "/index.js",
-    "templateName": "indexjs.template"
-  },
-  {
-    "filePath": "/db.js",
-    "templateName": "db.template"
-  },
-  {
-    "filePath": "/initRoutes.js",
-    "templateName": "initRoutes.template"
-  },
-  {
-    "filePath": "/Dockerfile",
-    "templateName": "docker.template"
-  },
-  {
-    "filePath": "/docker-compose.yml",
-    "templateName": "dockeryml.template"
-  },
-  {
-    "filePath": "/up",
-    "templateName": "up.template"
-  },
-  {
-    "filePath": "/down",
-    "templateName": "down.template"
-  },
-  {
-    "filePath": "/.gitignore",
-    "templateName": "gitignore.template"
-  },
-  {
-    "filePath": "/.dockerignore",
-    "templateName": "dockerignore.template"
-  },
-  {
-    "filePath": "/package.json",
-    "templateName": "packageJson.template"
-  }
-  {
-    "filePath": "/README.md",
-    "templateName": "auth.template"
-  },
-  {
-    "filePath": "/bin/www.js",
-    "templateName": "www.template"
-  },
-  {
-    "filePath": "/utils/logger.js",
-    "templateName": "logger.template"
-  },
-  {
-    "filePath": "/middleware/auth.js",
-    "templateName": "auth.template"
-  },
-  {
-    "filePath": "/middleware/trace.js",
-    "templateName": "tracer.template"
-  }
-]
+{
+  "data": [
+    {
+      "filePath": "/index.js",
+      "templateName": "indexjs.template"
+    },
+    {
+      "filePath": "/db.js",
+      "templateName": "db.template"
+    },
+    {
+      "filePath": "/initRoutes.js",
+      "templateName": "initRoutes.template"
+    },
+    {
+      "filePath": "/Dockerfile",
+      "templateName": "docker.template"
+    },
+    {
+      "filePath": "/docker-compose.yml",
+      "templateName": "dockeryml.template"
+    },
+    {
+      "filePath": "/up",
+      "templateName": "up.template"
+    },
+    {
+      "filePath": "/down",
+      "templateName": "down.template"
+    },
+    {
+      "filePath": "/.gitignore",
+      "templateName": "gitignore.template"
+    },
+    {
+      "filePath": "/.dockerignore",
+      "templateName": "dockerignore.template"
+    },
+    {
+      "filePath": "/package.json",
+      "templateName": "packageJson.template"
+    },
+    {
+      "filePath": "/README.md",
+      "templateName": "auth.template"
+    },
+    {
+      "filePath": "/bin/www.js",
+      "templateName": "www.template"
+    },
+    {
+      "filePath": "/utils/logger.js",
+      "templateName": "logger.template"
+    },
+    {
+      "filePath": "/middleware/auth.js",
+      "templateName": "auth.template"
+    },
+    {
+      "filePath": "/middleware/trace.js",
+      "templateName": "tracer.template"
+    }
+  ]
+}
