@@ -1,15 +1,55 @@
-export const list = (req,res) => {
+const repo = require('../repositories/{{.ModelName}}');
 
+export const list = async (req,res) => {
+  try{
+    let data = await repo.list()
+    res.status(200).send(data)
+  }catch(err){
+    res.status(500).send(err)
+  }
 }
 
-export const update = (req,res) => {
+export const update = async (req, res) => {
+  // make sure req has id on it
+  if(!req.query.id){
+    res.status(400).send('No Id on request')
+  }
 
+  if(!req.body || !Object.keys(req.body).length){
+    res.status(400).send('Empty Request')
+  }
+
+  try{
+    let data = await repo.update(req.query.id, req.body)
+    res.status(200).send(data)
+  }catch(err){
+    res.status(500).send(err)
+  }
 }
 
-export const add = (req,res) => {
+export const add = async (req,res) => {
+  if(!req.body || !Object.keys(req.body).length){
+    res.status(400).send('Empty Request')
+  }
 
+  try{
+    let data = await repo.save(req.body)
+    res.status(200).send(data)
+  }catch(err){
+    res.status(500).send(err)
+  }
 }
 
-export const delete = (req,res) => {
+export const delete = async (req,res) => {
+  // make sure req has id on it
+  if(!req.query.id){
+    res.status(400).send('No Id on request')
+  }
 
+  try{
+    let data = await repo.delete(req.query.id)
+    res.status(200).send(data)
+  }catch(err){
+    res.status(500).send(err)
+  }
 }
