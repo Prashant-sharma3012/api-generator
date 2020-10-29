@@ -13,3 +13,12 @@ type FolderStructure struct {
 	RootFolders []Folders `json:"rootFolders"`
 	RootFiles   []string  `json:"rootFiles"`
 }
+
+func (f *FolderStructure) CreateEmptyStructure() {
+
+}
+
+func ParseFolderStructure() *FolderStructure {
+
+	return &FolderStructure{}
+}

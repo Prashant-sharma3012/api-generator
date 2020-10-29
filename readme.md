@@ -24,3 +24,4 @@ down
 .gitignore
 .dockerignore
 README.md
+package.json
