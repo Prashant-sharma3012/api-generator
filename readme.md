@@ -16,3 +16,8 @@ db.js
 initRoutes.js
 Dockerfile
 docker-compose.yml
+up
+down
+.gitignore
+.dockerignore
+README.md

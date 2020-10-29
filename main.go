@@ -27,7 +27,7 @@ func main() {
 		RouteName:      "student",
 	}
 
-	err1 := dynamic.CreateRouteFileFromTemplate("./templates/dynamic/route.template", rd)
+	err1 := dynamic.CreateFileFromTemplate("./templates/dynamic/route.template", rd)
 	if err1 != nil {
 		fmt.Println(err1)
 		return

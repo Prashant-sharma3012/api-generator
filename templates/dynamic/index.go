@@ -5,7 +5,7 @@ import (
 	"text/template"
 )
 
-func CreateRouteFileFromTemplate(path string, data interface{}) error {
+func CreateFileFromTemplate(path string, data interface{}) error {
 	tpl := template.Must(template.ParseFiles(path))
 	err := tpl.Execute(os.Stdout, data)
 	if err != nil {
