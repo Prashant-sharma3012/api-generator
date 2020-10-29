@@ -4,10 +4,10 @@ let db = null;
 export default {
   connect: () => {
     return new Promise((resolve, reject) => {
-      const mongoDBURI = process.env.OFFCHAIN_DB_URL;
+      const mongoDBURI = process.env.DB_URL;
       console.info('mongodb:', mongoDBURI);
       mongoose.connect(mongoDBURI, {
-        dbName: process.env.OFFCHAIN_DB_NAME,
+        dbName: process.env.DB_NAME,
         useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,

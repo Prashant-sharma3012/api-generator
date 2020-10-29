@@ -1,10 +1,10 @@
-  import mongoose from 'mongoose';
-  const { Schema } = mongoose;
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
 
-  const {{.ModelName}}Schema = new Schema({
+const {{.ModelName}}Schema = new Schema({
 
-  });
+});
 
-  const {{.ModelName}} = mongoose.model('{{.ModelName}}', {{.ModelName}}Schema);
+const {{.ModelName}} = mongoose.model('{{.ModelName}}', {{.ModelName}}Schema);
 
-  module.exports = {{.ModelName}}
+module.exports = {{.ModelName}}
