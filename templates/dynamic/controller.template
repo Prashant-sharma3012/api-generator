@@ -1,0 +1,15 @@
+export const list = (req,res) => {
+
+}
+
+export const update = (req,res) => {
+
+}
+
+export const add = (req,res) => {
+
+}
+
+export const delete = (req,res) => {
+
+}

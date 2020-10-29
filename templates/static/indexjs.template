@@ -1,0 +1,44 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const helmet = require('helmet');
+const logger = require('./utils/logger');
+const initRoutes = require('./initRoutes');
+const auth = require('./middleware/auth');
+const traceroute = require('./middleware/trace');
+
+const app = express();
+
+app.use((req, res, next) => {
+  if (req.get('Origin')) {
+    res.setHeader('Access-Control-Allow-Origin', req.get('Origin'));
+  }
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS, PATCH, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Ocp-Apim-Subscription-Key, Content-Type, Authorization, Accept, xsrf_token',
+  );
+  if (req.method === 'OPTIONS') {
+    res.end();
+  } else {
+    next();
+  }
+});
+
+logger.info("Adding Middlewares");
+
+app.get("/hello", (req, res)=>{
+  res.end("Hey!, server this side. Have a Nice Day")
+})
+
+// A bit of safe gaurding
+// commenting this out as it will block cors
+// app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(traceroute);
+app.use(auth.authenticate);
+
+initRoutes(app);
+
+module.exports = app;

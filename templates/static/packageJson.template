@@ -1,0 +1,25 @@
+package static
+
+var packageJson = `
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/bin/www.js",
+    "dev": "nodemon ./src/bin/www.js",
+    "local": "env NODE_ENV=local nodemon ./src/bin/www.js"
+  },
+  "author": "prashant",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2",
+    "jsonwebtoken": "^8.5.1",
+  },
+}
+`

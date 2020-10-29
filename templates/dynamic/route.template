@@ -1,0 +1,8 @@
+const ctrl = require('../controllers/{{.ControllerName}}');
+
+module.exports = (app) => {
+    app.get('/{{.RouteName}}', ctrl.list);
+    app.put('/{{.RouteName}}/:id', ctrl.update);
+    app.post('/{{.RouteName}}', ctrl.add);
+    app.delete('/{{.RouteName}}/:id', ctrl.delete)
+}
