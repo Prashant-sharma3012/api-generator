@@ -6,7 +6,7 @@ var dockeryml = `
 		api:
 			build:
 				context: ./
-				dockerfile: dev.Dockerfile
+				dockerfile: Dockerfile
 			command: dev
 			ports:
 				- '3000:3000'
