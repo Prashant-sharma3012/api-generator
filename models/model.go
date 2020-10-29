@@ -1,6 +1,6 @@
 package models
 
 type Model struct {
-	Name   string
-	Schema Schema
+	Name   string `json:"name"`
+	Schema Schema `json:"schema"`
 }

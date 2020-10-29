@@ -1,7 +1,8 @@
 package models
 
 type Project struct {
-	ProjectName string
-	Models      []Model
-	Dockerize   bool
+	ProjectName string  `json:"projectName"`
+	Models      []Model `json:"models"`
+	Dockerize   bool    `json:"dockrize"`
+	Destination string  `json:"destination"`
 }

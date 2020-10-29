@@ -10,5 +10,6 @@
       "schema": {}
     }
   ],
-  "dockerize": true
+  "dockerize": true,
+  "destination": "."
 }
