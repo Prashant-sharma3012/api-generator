@@ -11,6 +11,9 @@ repositories
   repositoryName.js
 utils
   logger.js
+middleware
+  auth.js
+  trace.js
 index.js
 db.js
 initRoutes.js
