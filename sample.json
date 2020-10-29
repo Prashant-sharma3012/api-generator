@@ -1,0 +1,14 @@
+{
+  "projectName": "MyNodeApp",
+  "models": [
+    {
+      "name": "Student",
+      "schema": {}
+    },
+    {
+      "name": "Subject",
+      "schema": {}
+    }
+  ],
+  "dockerize": true
+}
