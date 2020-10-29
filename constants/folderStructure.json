@@ -1,0 +1,44 @@
+{
+  "rootFiles": [
+    "index.js",
+    "db.js",
+    "initRoutes.js",
+    "Dockerfile",
+    "docker-compose.yml",
+    "up",
+    "down",
+    ".gitignore",
+    ".dockerignore",
+    "README.md"
+  ],
+  "rootFolders": [
+    {
+      "name": "bin",
+      "contents": ["www.js"]
+    },
+    {
+      "name": "routes",
+      "contents": []
+    },
+    {
+      "name": "controllers",
+      "contents": []
+    },
+    {
+      "name": "models",
+      "contents": []
+    },
+    {
+      "name": "repositories",
+      "contents": []
+    },
+    {
+      "name": "utils",
+      "contents": ["logger.js"]
+    },
+    {
+      "name": "middleware",
+      "contents": ["auth.js", "trace.js"]
+    }
+  ]
+}
