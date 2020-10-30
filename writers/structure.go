@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 
 	"github.com/Prashant-sharma3012/api-generator/models"
 )
@@ -19,9 +20,9 @@ type Folders struct {
 }
 
 type FolderStructure struct {
-	RootFolders []Folders `json:"rootFolders"`
-	RootFiles   []string  `json:"rootFiles"`
-	ProjectName models.Project
+	RootFolders    []Folders `json:"rootFolders"`
+	RootFiles      []string  `json:"rootFiles"`
+	ProjectDetails *models.Project
 }
 
 type FolderToTemplate struct {
@@ -35,11 +36,46 @@ type FolderToTemplateData struct {
 
 func (f *FolderStructure) CreateEmptyStructure() {
 	// make folder with project name
-
+	projectName := f.ProjectDetails.ProjectName
+	destination := f.ProjectDetails.Destination
+	basePath := destination + "/" + projectName + "/"
 	// create empty root files
+
+	_ = os.Mkdir(basePath, 0777)
+
+	fmt.Println("Writing files...")
+	fmt.Println("Base Folder: ", basePath)
+
+	for _, fileName := range f.RootFiles {
+		fullPath := basePath + fileName
+		fmt.Println("Writing: ", fullPath)
+		err := ioutil.WriteFile(fullPath, nil, 0777)
+		if err != nil {
+			fmt.Println("error writing root file")
+			fmt.Println(err)
+		}
+	}
+
+	for _, folderDetails := range f.RootFolders {
+		folderPath := basePath + folderDetails.Name + "/"
+		_ = os.Mkdir(folderPath, 0777)
+		for _, fileName := range folderDetails.Contents {
+			fullPath := folderPath + fileName
+			fmt.Println("Writing: ", fullPath)
+			err := ioutil.WriteFile(fullPath, nil, 0777)
+			if err != nil {
+				fmt.Println("error writing root folders")
+				fmt.Println(err)
+			}
+		}
+	}
 
 	// create empty folders
 
+}
+
+func (f *FolderStructure) AddProjectDetails(projectDetails *models.Project) {
+	f.ProjectDetails = projectDetails
 }
 
 func WriteStaticTemplates(templateMap map[string]string, basePath string) {
@@ -60,6 +96,22 @@ func ParseFolderStructure() *FolderStructure {
 	}
 
 	return &fs
+}
+
+func ParseSampleJson() *models.Project {
+	content, err := ioutil.ReadFile("sample.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	project := models.Project{}
+
+	err = json.Unmarshal(content, &project)
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+
+	return &project
 }
 
 func ParseFileToFolderMap() map[string]string {
