@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/Prashant-sharma3012/api-generator/models"
+	"github.com/Prashant-sharma3012/api-generator/templates/dynamic"
 	"github.com/Prashant-sharma3012/api-generator/templates/static"
 )
 
@@ -95,6 +96,96 @@ func (f *FolderStructure) GetFilePaths() []string {
 	}
 
 	return paths
+}
+
+type routeData struct {
+	ControllerName string
+	RouteName      string
+}
+
+type modelData struct {
+	ModelName string
+}
+
+func (f *FolderStructure) CreateDynamicFiles() {
+	for _, model := range f.ProjectDetails.Models {
+		// routes
+		routeTemplate := dynamic.GetRouterTemplate()
+		routePath := f.ProjectDetails.ProjectName + "/routes/"
+
+		// create route file
+		routeFile, err := os.Create(routePath + model.Name + ".js")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		routeData := routeData{
+			ControllerName: model.Name,
+			RouteName:      model.Name,
+		}
+
+		err1 := routeTemplate.Execute(routeFile, routeData)
+		if err1 != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// controllers
+		ctrlTemplate := dynamic.GetCtrlTemplate()
+		ctrlPath := f.ProjectDetails.ProjectName + "/controllers/"
+
+		// create route file
+		ctrlFile, err := os.Create(ctrlPath + model.Name + ".js")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		modelData := modelData{
+			ModelName: model.Name,
+		}
+
+		err1 = ctrlTemplate.Execute(ctrlFile, modelData)
+		if err1 != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// repos
+		repoTemplate := dynamic.GetRepoTemplate()
+		repoPath := f.ProjectDetails.ProjectName + "/repositories/"
+
+		// create route file
+		repoFile, err := os.Create(repoPath + model.Name + ".js")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		err1 = repoTemplate.Execute(repoFile, modelData)
+		if err1 != nil {
+			fmt.Println(err)
+			return
+		}
+
+		// models
+		modelTemplate := dynamic.GetModelTemplate()
+		modelPath := f.ProjectDetails.ProjectName + "/models/"
+
+		// create route file
+		modelFile, err := os.Create(modelPath + model.Name + ".js")
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		err1 = modelTemplate.Execute(modelFile, modelData)
+		if err1 != nil {
+			fmt.Println(err)
+			return
+		}
+	}
 }
 
 func WriteStaticTemplates(templateMap map[string]string, basePath string, paths []string) {

@@ -18,4 +18,5 @@ func main() {
 	folderStructure.CreateEmptyStructure()
 
 	writers.WriteStaticTemplates(filesAndFolderMap, projectDetails.ProjectName, folderStructure.GetFilePaths())
+	folderStructure.CreateDynamicFiles()
 }

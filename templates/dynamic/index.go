@@ -1,16 +1,30 @@
 package dynamic
 
 import (
-	"os"
 	"text/template"
 )
 
-func CreateFileFromTemplate(path string, data interface{}) error {
+func GetDynamicTemplate(path string) *template.Template {
 	tpl := template.Must(template.ParseFiles(path))
-	err := tpl.Execute(os.Stdout, data)
-	if err != nil {
-		return err
-	}
+	return tpl
+}
 
-	return nil
+func GetRouterTemplate() *template.Template {
+	tpl := template.Must(template.ParseFiles("./templates/dynamic/route.template"))
+	return tpl
+}
+
+func GetModelTemplate() *template.Template {
+	tpl := template.Must(template.ParseFiles("./templates/dynamic/model.template"))
+	return tpl
+}
+
+func GetCtrlTemplate() *template.Template {
+	tpl := template.Must(template.ParseFiles("./templates/dynamic/controller.template"))
+	return tpl
+}
+
+func GetRepoTemplate() *template.Template {
+	tpl := template.Must(template.ParseFiles("./templates/dynamic/repository.template"))
+	return tpl
 }
