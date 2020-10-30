@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/Prashant-sharma3012/api-generator/models"
+	"github.com/Prashant-sharma3012/api-generator/templates/static"
 )
 
 // responsible for creating folder structure befotre writers start writing to them
@@ -78,8 +79,51 @@ func (f *FolderStructure) AddProjectDetails(projectDetails *models.Project) {
 	f.ProjectDetails = projectDetails
 }
 
-func WriteStaticTemplates(templateMap map[string]string, basePath string) {
+func (f *FolderStructure) GetFilePaths() []string {
+	var paths []string
 
+	for _, fileName := range f.RootFiles {
+		paths = append(paths, "/"+fileName)
+	}
+
+	for _, folderDetails := range f.RootFolders {
+		folderPath := "/" + folderDetails.Name + "/"
+		for _, fileName := range folderDetails.Contents {
+			fullPath := folderPath + fileName
+			paths = append(paths, fullPath)
+		}
+	}
+
+	return paths
+}
+
+func WriteStaticTemplates(templateMap map[string]string, basePath string, paths []string) {
+	for _, path := range paths {
+		templateName := templateMap[path]
+		fullFilePath := basePath + path
+		templatePath := "./templates/static/" + templateName
+
+		fmt.Println("Writing template: ", templatePath)
+		fmt.Println("Writing template to file: ", fullFilePath)
+
+		tpl, err := static.GetTemplate(templatePath)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+
+		file, err1 := os.OpenFile(fullFilePath, os.O_RDWR|os.O_CREATE, 0755)
+		if err1 != nil {
+			fmt.Println(err1)
+			return
+		}
+
+		err2 := tpl.Execute(file, nil)
+		if err2 != nil {
+			fmt.Println(err2)
+			return
+		}
+	}
 }
 
 func ParseFolderStructure() *FolderStructure {
@@ -115,9 +159,9 @@ func ParseSampleJson() *models.Project {
 }
 
 func ParseFileToFolderMap() map[string]string {
-	var pathToTemplateMap map[string]string
+	pathToTemplateMap := map[string]string{}
 
-	content, err := ioutil.ReadFile("constants/folderStructure.json")
+	content, err := ioutil.ReadFile("constants/fileToTemplateMap.json")
 	if err != nil {
 		log.Fatal(err)
 	}
