@@ -1,6 +1,6 @@
 const repo = require('../repositories/{{.ModelName}}');
 
-export const list = async (req,res) => {
+const list = async (req,res) => {
   try{
     let data = await repo.list()
     res.status(200).send(data)
@@ -9,7 +9,7 @@ export const list = async (req,res) => {
   }
 }
 
-export const update = async (req, res) => {
+const update = async (req, res) => {
   // make sure req has id on it
   if(!req.query.id){
     res.status(400).send('No Id on request')
@@ -27,7 +27,7 @@ export const update = async (req, res) => {
   }
 }
 
-export const add = async (req,res) => {
+const add = async (req,res) => {
   if(!req.body || !Object.keys(req.body).length){
     res.status(400).send('Empty Request')
   }
@@ -40,16 +40,23 @@ export const add = async (req,res) => {
   }
 }
 
-export const delete = async (req,res) => {
+const remove = async (req,res) => {
   // make sure req has id on it
   if(!req.query.id){
     res.status(400).send('No Id on request')
   }
 
   try{
-    let data = await repo.delete(req.query.id)
+    let data = await repo.remove(req.query.id)
     res.status(200).send(data)
   }catch(err){
     res.status(500).send(err)
   }
+}
+
+module.exports = {
+  list,
+  remove,
+  add,
+  update
 }

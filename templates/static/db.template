@@ -1,13 +1,16 @@
-import mongoose from 'mongoose';
+const mongoose = require("mongoose");
 let db = null;
 
-export default {
+module.exports = {
   connect: () => {
     return new Promise((resolve, reject) => {
-      const mongoDBURI = process.env.DB_URL;
-      console.info('mongodb:', mongoDBURI);
+      let dbName = process.env.DB_NAME || "myapp";
+      let dbUrl = process.env.DB_URL || "mongodb://localhost:27017";
+      let mongoDBURI = `${dbUrl}/${dbName}`;
+
+      console.info("Connecting to:", mongoDBURI);
+
       mongoose.connect(mongoDBURI, {
-        dbName: process.env.DB_NAME,
         useNewUrlParser: true,
         useFindAndModify: false,
         useCreateIndex: true,
@@ -15,13 +18,13 @@ export default {
 
       mongoose.Promise = global.Promise;
       db = mongoose.connection;
-      db.on('error', () => {
-        console.error.bind(console, 'MongoDB connection error:');
-        return reject('Error While connecting to db');
+      db.on("error", () => {
+        console.error.bind(console, "MongoDB connection error:");
+        return reject("Error While connecting to db");
       });
-      db.on('connected', () => {
+      db.on("connected", () => {
         console.info(`Mongoose default connection open to ${mongoDBURI}`);
-        return resolve('Connected');
+        return resolve("Connected");
       });
     });
   },

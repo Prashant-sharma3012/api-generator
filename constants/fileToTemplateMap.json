@@ -59,6 +59,10 @@
     {
       "filePath": "/middleware/trace.js",
       "templateName": "tracer.template"
+    },
+    {
+      "filePath": "/package.json",
+      "templateName": "packageJson.template"
     }
   ]
 }

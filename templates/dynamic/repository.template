@@ -1,17 +1,24 @@
 const model = require('../models/{{.ModelName}}');
 
-export const list = () => {
+const list = () => {
   return {{.ModelName}}.find({});
 }
 
-export const update = (id, data) => {
+const update = (id, data) => {
   return {{.ModelName}}.findOneAndUpdate({ _id: id }, data);
 }
 
-export const save = (data) => {
+const save = (data) => {
   return {{.ModelName}}.create(data);
 }
 
-export const delete = (id) => {
+const remove = (id) => {
   return {{.ModelName}}.findOneAndDelete({ _id: id });
+}
+
+module.exports = {
+  list,
+  remove,
+  save,
+  update
 }

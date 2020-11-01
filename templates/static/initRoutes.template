@@ -1,15 +1,11 @@
-package static
+const logger = require('./utils/logger');
+const fs = require('fs');
 
-var initRoutes = `
-	const logger = require('./utils/logger');
-	const fs = require('fs');
+module.exports = (app) => {
+	logger.info("Adding Routes");
 
-	module.exports = (app) => {
-		logger.info("Adding Routes");
+	fs.readdirSync('./routes')
+		.map(filename => require(`./routes/${filename}`)(app));
 
-		fs.readdirSync('./src/routes')
-			.map(filename => require(`./routes/${filename}`)(app));
-
-		logger.info("Routes Initialized");
+	logger.info("Routes Initialized");
 }
-`

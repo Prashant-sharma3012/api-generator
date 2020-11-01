@@ -1,15 +1,11 @@
-package static
-
-var dockeryml = `
-	version: '3.1'
-	services:
-		api:
-			build:
-				context: ./
-				dockerfile: Dockerfile
-			command: dev
-			ports:
-				- '3000:3000'
-			volumes:
-				- .:/app
-`
+version: '3.1'
+services:
+	api:
+		build:
+			context: ./
+			dockerfile: Dockerfile
+		command: dev
+		ports:
+			- '3000:3000'
+		volumes:
+			- .:/app
