@@ -25,3 +25,11 @@ down
 .dockerignore
 README.md
 package.json
+
+Datatypes in Model 
+string
+number
+date
+bool
+objectId
+array

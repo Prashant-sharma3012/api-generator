@@ -104,11 +104,13 @@ type routeData struct {
 }
 
 type modelData struct {
-	ModelName string
+	ModelName  string
+	FieldNames map[string]string
 }
 
 func (f *FolderStructure) CreateDynamicFiles() {
 	for _, model := range f.ProjectDetails.Models {
+		fieldNames := map[string]string{}
 		// routes
 		routeTemplate := dynamic.GetRouterTemplate()
 		routePath := f.ProjectDetails.ProjectName + "/routes/"
@@ -142,8 +144,13 @@ func (f *FolderStructure) CreateDynamicFiles() {
 			return
 		}
 
+		for _, fieldDetails := range model.Schema {
+			fieldNames[fieldDetails.FieldName] = fieldDetails.Type
+		}
+
 		modelData := modelData{
-			ModelName: model.Name,
+			ModelName:  model.Name,
+			FieldNames: fieldNames,
 		}
 
 		err1 = ctrlTemplate.Execute(ctrlFile, modelData)

@@ -2,7 +2,26 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const {{.ModelName}}Schema = new Schema({
-
+{{- range $key, $val := .FieldNames}}
+  {{- if eq $val "string"}}
+  {{$key}}: String,
+  {{- end}} 
+  {{- if eq $val "number"}}
+  {{$key}}: Number,
+  {{- end}}
+  {{- if eq $val "date"}}
+  {{$key}}: Date,
+  {{- end}}
+  {{- if eq $val "bool"}}
+  {{$key}}: Boolean,
+  {{- end}}
+  {{- if eq $val "objectId"}}
+  {{$key}}: Schema.Types.ObjectId,
+  {{- end}}
+  {{- if eq $val "array"}}
+  {{$key}}: [],
+  {{- end}}
+{{- end}}
 });
 
 const {{.ModelName}} = mongoose.model('{{.ModelName}}', {{.ModelName}}Schema);

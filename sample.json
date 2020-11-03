@@ -3,11 +3,32 @@
   "models": [
     {
       "name": "Student",
-      "schema": {}
+      "schema": [
+        {
+          "fieldName": "firstname",
+          "type": "string"
+        },
+        {
+          "fieldName": "lastname",
+          "type": "string"
+        },
+        {
+          "fieldName": "dob",
+          "type": "date"
+        },
+        {
+          "fieldName": "phone",
+          "type": "number"
+        },
+        {
+          "fieldName": "subjects",
+          "type": "array"
+        }
+      ]
     },
     {
       "name": "Subject",
-      "schema": {}
+      "schema": []
     }
   ],
   "dockerize": true,
